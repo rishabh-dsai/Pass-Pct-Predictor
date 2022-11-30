@@ -41,6 +41,7 @@ dataframe=pd.read_excel("Requisite format.xlsx")
 feature_imp=pd.read_excel("Feature importances.xlsx")
 feature_imp.set_index('Feature',inplace=True)
 
+st.write(dataframe.columns)
 
 #%%
 
@@ -70,7 +71,7 @@ y_preds=model.predict(X)
 
 dataframe['Predicted pass percentage (%)']=y_preds
 st.subheader(" ")
-
+st.write(dataframe.columns)
 
 #%%
 
