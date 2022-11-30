@@ -1,3 +1,19 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov 30 20:22:12 2022
+
+@author: asus
+"""
+
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov 30 18:19:27 2022
+
+@author: asus
+"""
+
+
+
 
 import re
 import numpy as np
@@ -33,11 +49,10 @@ with st.expander("Feature Importance",expanded=True):
     st.bar_chart(feature_imp,use_container_width=True)
 
 
-with st.expander("Correaltion Heatmap"):
+with st.expander("Correlation Heatmap"):
     st.write("A correlation heatmap to show the relationship between features. \
                  More importantly between the Pass Percentage & other features.")
-    fig=px.imshow(heatmap_data.corr())
-#    fig.show()
+    fig=px.imshow(heatmap_data.corr(),color_continuous_scale="ylgnbu")
     st.plotly_chart(fig, use_container_width=True)
 
 #%%
