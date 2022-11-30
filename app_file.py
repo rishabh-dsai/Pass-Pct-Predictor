@@ -41,18 +41,15 @@ feature_imp=pd.read_excel("Feature importances.xlsx")
 feature_imp.set_index('Feature',inplace=True)
 
 
-st.subheader("The feature importances of top 20 features are represented below:")
+st.subheader("The feature importances of top 10 features are represented below:")
 st.bar_chart(feature_imp,use_container_width=True)
 
 inf=dataframe[['School name','Block','District']]
 
 
 
-X=dataframe[['Gen_Studen', 'x_girls', 'Boundary_w', 'Per_m_Lit', 'ST_Student',
-       'x_boys', 'Tot_Teachers', 'Qualified_T', 'PTR', 'SC_Student',
-       'OBC_Studen', 'Repeater_x_g', 'Repeater_x_b', 'No_of_Girls',
-       'Regular_Te', 'No_of_Boys', 'Area', 'No_of_Classrooms', 'PER_P_06',
-       'Per_Illit']]
+X=dataframe[['Gen_Studen', 'x_girls', 'Boundary_w', 'Per_m_Lit', 'PTR', 'x_boys',
+       'Tot_Teachers', 'OBC_Studen', 'Qualified_T', 'ST_Student']]
 y_preds=model.predict(X)
 
 predictions=pd.DataFrame(y_preds,columns=['Predictions'])
