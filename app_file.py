@@ -20,8 +20,6 @@ else:
 model = joblib.load("Model.sav")
 heatmap_data=pd.read_excel("Heatmap Data.xlsx")
 
-dataframe=pd.read_excel("Requisite format.xlsx")
-
 feature_imp=pd.read_excel("Feature importances.xlsx")
 feature_imp.set_index('Feature',inplace=True)
 
