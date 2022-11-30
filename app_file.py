@@ -1,3 +1,19 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov 30 20:22:12 2022
+
+@author: asus
+"""
+
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Nov 30 18:19:27 2022
+
+@author: asus
+"""
+
+
+
 
 import re
 import numpy as np
@@ -23,7 +39,6 @@ heatmap_data=pd.read_excel("Heatmap Data.xlsx")
 feature_imp=pd.read_excel("Feature importances.xlsx")
 feature_imp.set_index('Feature',inplace=True)
 
-st.write(dataframe)
 
 #%%
 
@@ -38,7 +53,7 @@ with st.expander("Correaltion Heatmap"):
     st.subheader("A correlation heatmap to show the relationship between features. \
                  More importantly between the Pass Percentage & other features.")
     fig=px.imshow(heatmap_data.corr())
-    fig.show()
+#    fig.show()
     st.plotly_chart(fig, use_container_width=True)
 
 #%%
@@ -64,12 +79,21 @@ tab_school,tab_block,tab_district=st.tabs(['School Specific','Block Specific','D
 with tab_school:
     
     school=st.text_input("Please type the name of School",value="Dummy_11")
-    st.caption("The school"+school+" metrics and Predicted Pass Percentage:")
-    st.write(dataframe[dataframe['School Name']==school])
+    st.caption("School "+school+" metrics and Predicted Pass Percentage:")
+    st.write(dataframe[dataframe['School Name']==school].set_index("School Name"))
+    
+with tab_block:
+    
+    block=st.selectbox("Please select a Block",\
+                       ('Pynursla', 'Mylliem', 'Mawphlang', 'Mawknyrew', 'Mawsynram'))
+    block_df=dataframe[dataframe['Block']==block]
+    st.write("Number of Schools in the block: ",block_df['School Name'].nunique())
+    sub_df=block_df[['School Name', 'Block', 'District','Predicted pass percentage (%)']]
+    st.write(sub_df)
+    bar_ch=px.bar(sub_df[['School Name','Predicted pass percentage (%)']].set_index("School Name"),\
+                  color_continuous_scale="ylgnbu")
 
-
-
-
+    st.plotly_chart(bar_ch,use_container_width=True)
 
 
 
