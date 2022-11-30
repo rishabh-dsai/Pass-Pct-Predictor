@@ -50,7 +50,7 @@ with st.expander("Feature Importance",expanded=True):
 
 
 with st.expander("Correaltion Heatmap"):
-    st.subheader("A correlation heatmap to show the relationship between features. \
+    st.write("A correlation heatmap to show the relationship between features. \
                  More importantly between the Pass Percentage & other features.")
     fig=px.imshow(heatmap_data.corr())
 #    fig.show()
@@ -79,7 +79,7 @@ tab_school,tab_block,tab_district=st.tabs(['School Specific','Block Specific','D
 with tab_school:
     
     school=st.text_input("Please type the name of School",value="Dummy_11")
-    st.caption("School "+school+" metrics and Predicted Pass Percentage:")
+    st.write("School "+school+" metrics and Predicted Pass Percentage:")
     st.write(dataframe[dataframe['School Name']==school].set_index("School Name"))
     
 with tab_block:
@@ -89,12 +89,28 @@ with tab_block:
     block_df=dataframe[dataframe['Block']==block]
     st.write("Number of Schools in the block: ",block_df['School Name'].nunique())
     sub_df=block_df[['School Name', 'Block', 'District','Predicted pass percentage (%)']]
-    st.write(sub_df)
-    bar_ch=px.bar(sub_df[['School Name','Predicted pass percentage (%)']].set_index("School Name"),y="Predicted pass percentage (%)")
+    st.write(sub_df.set_index("School Name"))
+    st.write(" ")
+    st.write("The average predicted pass percentage for the block: ",sub_df['Predicted pass percentage (%)'].mean(),"%")
+
+    bar_ch=px.bar(sub_df[['School Name','Predicted pass percentage (%)']].set_index("School Name"),\
+                  y='Predicted pass percentage (%)')
 
     st.plotly_chart(bar_ch,use_container_width=True)
 
 
+with tab_district:
+    st.write("Number of Schools in the district: ",dataframe['School Name'].nunique())
+    dis_df=block_df[['School Name', 'Block', 'District','Predicted pass percentage (%)']]
+    st.write(dis_df.set_index("School Name"))
+    st.write(" ")
+    st.write("The average predicted pass percentage for the district: ",dis_df['Predicted pass percentage (%)'].mean(),"%")
+
+    bar_ch_2=px.bar(dis_df[['School Name','Predicted pass percentage (%)']].set_index("School Name"),\
+                  y='Predicted pass percentage (%)')
+
+    st.plotly_chart(bar_ch_2,use_container_width=True)
+    
 
 
 
