@@ -66,6 +66,8 @@ X=dataframe[['Gen_Studen', 'x_girls', 'Boundary_w', 'Per_m_Lit', 'PTR', 'x_boys'
        'Tot_Teachers', 'OBC_Studen', 'Qualified_T', 'ST_Student']]
 y_preds=model.predict(X)
 
+#predictions=pd.DataFrame(y_preds,columns=['Predictions'],index=dataframe['School name'])
+
 dataframe['Predicted pass percentage (%)']=y_preds
 st.subheader(" ")
 
@@ -76,13 +78,13 @@ st.subheader(" ")
 
 tab_school,tab_block,tab_district=st.tabs(['School Specific','Block Specific','District Overview'])    
 
-school_df=dataframe.set_index("School name")
+#school_df=dataframe.set_index("School name")
 
 with tab_school:
     
     school=st.text_input("Please type the name of School",value="Dummy_11")
     st.caption("The school"+school+" metrics and Predicted Pass Percentage:")
-    st.write(school_df.loc[school,:])
+    st.write(dataframe[dataframe['School name']==school])
 
 
 
