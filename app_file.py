@@ -1,19 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 30 20:22:12 2022
-
-@author: asus
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 30 18:19:27 2022
-
-@author: asus
-"""
-
-
-
 
 import re
 import numpy as np
@@ -101,7 +85,7 @@ with tab_block:
 
 with tab_district:
     st.write("Number of Schools in the district: ",dataframe['School Name'].nunique())
-    dis_df=block_df[['School Name', 'Block', 'District','Predicted pass percentage (%)']]
+    dis_df=dataframe[['School Name', 'Block', 'District','Predicted pass percentage (%)']]
     st.write(dis_df.set_index("School Name"))
     st.write(" ")
     st.write("The average predicted pass percentage for the district: ",dis_df['Predicted pass percentage (%)'].mean(),"%")
