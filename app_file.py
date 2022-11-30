@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Wed Nov 30 20:22:12 2022
+
+@author: asus
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Wed Nov 30 18:19:27 2022
 
 @author: asus
@@ -29,57 +36,73 @@ else:
 model = joblib.load("Model.sav")
 heatmap_data=pd.read_excel("Heatmap Data.xlsx")
 
-fig=px.imshow(heatmap_data.corr())
-fig.show()
-st.plotly_chart(fig, use_container_width=True)
-
-
-#%%
-
+dataframe=pd.read_excel("Requisite format.xlsx")
 
 feature_imp=pd.read_excel("Feature importances.xlsx")
 feature_imp.set_index('Feature',inplace=True)
 
 
-st.subheader("The feature importances of top 10 features are represented below:")
-st.bar_chart(feature_imp,use_container_width=True)
+#%%
 
-inf=dataframe[['School name','Block','District']]
+# Displaying the Feature Importances & Heatmap
+
+with st.exapnder("Feature Importance",expanded=True):
+    st.subheader("The feature importances of top 10 features are represented below:")
+    st.bar_chart(feature_imp,use_container_width=True)
 
 
+with st.expander("Correaltion Heatmap"):
+    st.subheader("A correlation heatmap to show the relationship between features. \
+                 More importantly between the Pass Percentage & other features.")
+    fig=px.imshow(heatmap_data.corr())
+    fig.show()
+    st.plotly_chart(fig, use_container_width=True)
+
+#%%
+
+# Predictions on Data
 
 X=dataframe[['Gen_Studen', 'x_girls', 'Boundary_w', 'Per_m_Lit', 'PTR', 'x_boys',
        'Tot_Teachers', 'OBC_Studen', 'Qualified_T', 'ST_Student']]
 y_preds=model.predict(X)
 
-predictions=pd.DataFrame(y_preds,columns=['Predictions'])
+predictions=pd.DataFrame(y_preds,columns=['Predictions'],index=dataframe['School name'])
 
-dataframe['Predictions']=predictions
+dataframe['Predicted pass percentage (%)']=predictions
 st.subheader(" ")
 
-st.subheader("The input provided and pass percentage prediction is denoted in the table below:")
-st.write(dataframe)
+
+#%%
+
+# Option to type the school name to get exact preds:
+
+tab_school,tab_block,tab_district=st.tabs(['School Specific','Block Specific','District Overview'])    
+
+school_df=dataframe.set_index("School name")
+
+with tab_school:
+    
+    school=st.text_input("Please type the name of School",value="Dummy_11")
+    st.caption("The school"+school+" metrics and Predicted Pass Percentage:")
+    st.write(school_df.loc[school,:])
 
 
-st.caption("The pass percentage prediction represented in Chart:")
-st.bar_chart(predictions[['Predictions']])
+
+
+
+
+
+
+
+#%%
+
+# Displaying Disclaimer & Header
 
 st.header(" ")
 from PIL import Image
 image = Image.open('deepspatial.jpg')
 image_1=image.resize((180,30))
 st.image(image_1)
-
-
-
-
-
-
-
-
-
-
-
 
 
 
