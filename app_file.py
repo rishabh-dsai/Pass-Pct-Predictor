@@ -68,7 +68,7 @@ with tab_school:
     
     school=st.text_input("Please type the name of School",value="Dummy_11")
     st.write("School "+school+" metrics and Predicted Pass Percentage 2022:")
-    school_df=trend[trend['School Name']==school].set_index("School Name")
+    school_df=trend[trend['School Name']==school].set_index("School Name").drop(columns=['Block','District'])
     st.write(school_df)
     line_ch_sch=px.line(x=list(school_df.columns),y=school_df.iloc[0,:])
     st.plotly_chart(line_ch_sch,use_container_width=True)
