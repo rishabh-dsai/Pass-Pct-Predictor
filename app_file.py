@@ -17,13 +17,17 @@ if uploaded_file is not None:
 else:
     st.warning('Please Upload File')
 
-
 model = joblib.load("Model.sav")
 heatmap_data=pd.read_excel("Heatmap Data.xlsx")
 
 feature_imp=pd.read_excel("Feature importances.xlsx")
 feature_imp.set_index('Feature',inplace=True)
-
+trend=pd.read_excel("trend.xlsx")
+trend['PP_2021']=trend['PP_2021'].apply(lambda z:np.round(z,2)*100)
+trend['PP_2020']=trend['PP_2020'].apply(lambda z:np.round(z,2)*100)
+trend['PP_2019']=trend['PP_2019'].apply(lambda z:np.round(z,2)*100)
+trend['PP_2018']=trend['PP_2018'].apply(lambda z:np.round(z,2)*100)
+trend['PP_2017']=trend['PP_2017'].apply(lambda z:np.round(z,2)*100)
 
 #%%
 
@@ -63,8 +67,11 @@ tab_school,tab_block,tab_district=st.tabs(['School Specific','Block Specific','D
 with tab_school:
     
     school=st.text_input("Please type the name of School",value="Dummy_11")
-    st.write("School "+school+" metrics and Predicted Pass Percentage:")
-    st.write(dataframe[dataframe['School Name']==school].set_index("School Name"))
+    st.write("School "+school+" metrics and Predicted Pass Percentage 2022:")
+    school_df=dataframe[dataframe['School Name']==school].set_index("School Name")
+    st.write(school_df)
+    line_ch_sch=px.line(trend)
+    st.plotly_chart(line_ch_sch,use_container_width=True)
     
 with tab_block:
     
