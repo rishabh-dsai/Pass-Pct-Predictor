@@ -37,7 +37,7 @@ st.plotly_chart(fig, use_container_width=True)
 #%%
 
 
-feature_imp=pd.read_excel("Feature Importances.xlsx")
+feature_imp=pd.read_excel("Feature importances.xlsx")
 feature_imp.set_index('Feature',inplace=True)
 
 
