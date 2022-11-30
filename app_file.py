@@ -1,19 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 30 20:22:12 2022
-
-@author: asus
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 30 18:19:27 2022
-
-@author: asus
-"""
-
-
-
 
 import re
 import numpy as np
@@ -41,7 +25,6 @@ dataframe=pd.read_excel("Requisite format.xlsx")
 feature_imp=pd.read_excel("Feature importances.xlsx")
 feature_imp.set_index('Feature',inplace=True)
 
-st.write(dataframe.columns)
 
 #%%
 
@@ -71,22 +54,19 @@ y_preds=model.predict(X)
 
 dataframe['Predicted pass percentage (%)']=y_preds
 st.subheader(" ")
-st.write(dataframe.columns)
+
 
 #%%
 
 # Option to type the school name to get exact preds:
 
-st.write(dataframe.columns)
 tab_school,tab_block,tab_district=st.tabs(['School Specific','Block Specific','District Overview'])    
-
-#school_df=dataframe.set_index("School name")
 
 with tab_school:
     
     school=st.text_input("Please type the name of School",value="Dummy_11")
     st.caption("The school"+school+" metrics and Predicted Pass Percentage:")
-    st.write(dataframe[dataframe['School name']==school])
+    st.write(dataframe[dataframe['School Name']==school])
 
 
 
