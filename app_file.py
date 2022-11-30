@@ -76,6 +76,7 @@ st.subheader(" ")
 
 # Option to type the school name to get exact preds:
 
+st.write(dataframe.columns)
 tab_school,tab_block,tab_district=st.tabs(['School Specific','Block Specific','District Overview'])    
 
 #school_df=dataframe.set_index("School name")
