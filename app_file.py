@@ -66,9 +66,7 @@ X=dataframe[['Gen_Studen', 'x_girls', 'Boundary_w', 'Per_m_Lit', 'PTR', 'x_boys'
        'Tot_Teachers', 'OBC_Studen', 'Qualified_T', 'ST_Student']]
 y_preds=model.predict(X)
 
-predictions=pd.DataFrame(y_preds,columns=['Predictions'],index=dataframe['School name'])
-
-dataframe['Predicted pass percentage (%)']=predictions
+dataframe['Predicted pass percentage (%)']=y_preds
 st.subheader(" ")
 
 
