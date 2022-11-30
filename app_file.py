@@ -90,7 +90,7 @@ with tab_block:
     st.write("Number of Schools in the block: ",block_df['School Name'].nunique())
     sub_df=block_df[['School Name', 'Block', 'District','Predicted pass percentage (%)']]
     st.write(sub_df)
-    bar_ch=px.bar(sub_df[['School Name','Predicted pass percentage (%)']].set_index("School Name"),color="viridis")
+    bar_ch=px.bar(sub_df[['School Name','Predicted pass percentage (%)']].set_index("School Name"),y="Predicted pass percentage (%)")
 
     st.plotly_chart(bar_ch,use_container_width=True)
 
