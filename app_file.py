@@ -46,7 +46,7 @@ feature_imp.set_index('Feature',inplace=True)
 
 # Displaying the Feature Importances & Heatmap
 
-with st.exapnder("Feature Importance",expanded=True):
+with st.expander("Feature Importance",expanded=True):
     st.subheader("The feature importances of top 10 features are represented below:")
     st.bar_chart(feature_imp,use_container_width=True)
 
