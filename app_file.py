@@ -43,6 +43,31 @@ with st.expander("Correlation Heatmap"):
                  More importantly between the Pass Percentage & other features.")
     fig=px.imshow(heatmap_data.corr(),color_continuous_scale="viridis")
     st.plotly_chart(fig, use_container_width=True)
+    
+    st.write("Impact of features on Pass Percentage:")
+    base_df=pd.DataFrame([heatmap_data.iloc[5,:]],columns=heatmap_data.columns)
+    base_df.drop(columns='Pass_Perce',inplace=True)
+    st.write(base_df)
+    feature=st.select_box("Select a Feature to visualize its impact.",('Gen_Studen', 'x_girls', 'Boundary_w',
+                  'Per_m_Lit', 'PTR', 'x_boys','Tot_Teachers', 'OBC_Studen', 'Qualified_T', 
+                  'ST_Student'))
+    new_val=st.number_input("Enter the value to change to")
+    new_df=base_df.copy()
+    new_df[feature]=new_val
+    old_pred=model.predict(base_df[['Gen_Studen', 'x_girls', 'Boundary_w', 'Per_m_Lit', 'PTR', 'x_boys',
+       'Tot_Teachers', 'OBC_Studen', 'Qualified_T', 'ST_Student']])
+    new_pred=model.predict(new_df[['Gen_Studen', 'x_girls', 'Boundary_w', 'Per_m_Lit', 'PTR', 'x_boys',
+       'Tot_Teachers', 'OBC_Studen', 'Qualified_T', 'ST_Student']])
+    base_df['Predicted Pass Percentage']=old_pred
+    new_df['Predicted Pass Percentage']=new_pred
+    show_df=pd.concat([base_df,new_df])
+    show_df.index=['Old','New']
+    line_ch_sch=px.line(x=show_df.index,y=show_df['Predicted Pass Percentage'],color=show_df.index\
+                        ,markers=True,title="Impact of Features")
+    st.plotly_chart(line_ch_sch,use_container_width=True)
+    
+    
+    
 
 #%%
 
