@@ -162,10 +162,11 @@ with tab_district:
 
 #%%
 
-# Displaying Disclaimer & Header
+# Displaying Disclaimer
 
+st.header("")
 st.write("Please Note: For demo purposes we have considered a subset of features only.\
-         The accuracy of prediction completely relies on the quality and ccompleteness of the dataset.\
+         The accuracy of prediction completely relies on the quality and completeness of the dataset.\
         All datasets used are for showcase purpose only.")
 st.header(" ")
 from PIL import Image
