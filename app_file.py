@@ -123,9 +123,7 @@ with tab_district:
     dt_df['District Average']=[district_trend_df['2017'].mean(),district_trend_df['2018'].mean(),\
                                district_trend_df['2019'].mean(),district_trend_df['2020'].mean(),\
                                    district_trend_df['2021'].mean()]
-    dt_df.reset_index(inplace=True)
-    dt_df.rename(columns={'index':"Year"},inplace=True)    
-    line_ch_sch=px.line(dt_df,x='Year',markers=True,title="Trend of Pass Percentage in the District")
+    line_ch_sch=px.line(dt_df,markers=True,title="Trend of Pass Percentage in the District")
     st.plotly_chart(line_ch_sch,use_container_width=True)       
 
 
