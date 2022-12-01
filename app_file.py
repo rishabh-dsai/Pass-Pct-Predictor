@@ -85,7 +85,7 @@ with tab_block:
     sub_df=block_df[['School Name', 'Block', 'District','Predicted pass percentage (%)']]
     st.write(sub_df.set_index("School Name"))
     st.write(" ")
-    st.write("The average predicted pass percentage for the block: ",sub_df['Predicted pass percentage (%)'].mean(),"%")
+    st.write("The average predicted pass percentage for the block: ",np.round(sub_df['Predicted pass percentage (%)'].mean(),2),"%")
 
     bar_ch=px.bar(sub_df[['School Name','Predicted pass percentage (%)']].set_index("School Name"),\
                   y='Predicted pass percentage (%)')
@@ -109,7 +109,7 @@ with tab_district:
     dis_df=dataframe[['School Name', 'Block', 'District','Predicted pass percentage (%)']]
     st.write(dis_df.set_index("School Name"))
     st.write(" ")
-    st.write("The average predicted pass percentage for the district: ",dis_df['Predicted pass percentage (%)'].mean(),"%")
+    st.write("The average predicted pass percentage for the district: ",np.round(dis_df['Predicted pass percentage (%)'].mean(),2),"%")
 
     bar_ch_2=px.bar(dis_df[['School Name','Predicted pass percentage (%)']].set_index("School Name"),\
                   y='Predicted pass percentage (%)')
