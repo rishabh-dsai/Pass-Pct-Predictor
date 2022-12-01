@@ -73,7 +73,8 @@ with tab_school:
     school_df=school_df[['PP_2017','PP_2018','PP_2019','PP_2020','PP_2021']]
     ch_df=pd.DataFrame(zip(school_df.columns,school_df.iloc[0,:]),columns=["Year","Pass Pct"])
     ch_df['Year']=ch_df['Year'].apply(lambda z:z[-4:])
-    line_ch_sch=px.line(ch_df,x='Year',y='Pass Pct',markers=True,)
+    line_ch_sch=px.line(ch_df,x='Year',y='Pass Pct',markers=True,\
+                        title="Trend of Pass Percentage for the School")
     st.plotly_chart(line_ch_sch,use_container_width=True)
     
 with tab_block:
@@ -100,7 +101,7 @@ with tab_block:
     chk['Block Average']=[block_trend_df['2017'].mean(),block_trend_df['2018'].mean(),\
                           block_trend_df['2019'].mean(),block_trend_df['2020'].mean(),\
                           block_trend_df['2021'].mean()]
-    line_ch_sch=px.line(chk,markers=True,title="Trend of Pass Percentage in Block")
+    line_ch_sch=px.line(chk,markers=True,title="Trend of Pass Percentage in the Block")
     st.plotly_chart(line_ch_sch,use_container_width=True)   
 
 
