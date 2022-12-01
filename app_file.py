@@ -91,6 +91,14 @@ with tab_block:
                   y='Predicted pass percentage (%)')
 
     st.plotly_chart(bar_ch,use_container_width=True)
+    
+    block_trend_df=trend[trend['Block']==block]
+    block_trend_df=block_trend_df.set_index("School Name").drop(columns=['Block','District'])
+    block_trend_df=block_trend_df[['PP_2017','PP_2018','PP_2019','PP_2020','PP_2021']]
+    block_trend_df.columns=[z[-4:] for z in block_trend_df.columns]
+    chk=block_trend_df.T
+    line_ch_sch=px.line(chk,markers=True,)
+    st.plotly_chart(line_ch_sch,use_container_width=True)   
 
 
 with tab_district:
