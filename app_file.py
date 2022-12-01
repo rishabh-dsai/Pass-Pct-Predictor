@@ -116,6 +116,15 @@ with tab_district:
 
     st.plotly_chart(bar_ch_2,use_container_width=True)
     
+    district_trend_df=trend.drop(columns=['School Name','District']).groupby("Block").mean()
+    district_trend_df=district_trend_df[['PP_2017','PP_2018','PP_2019','PP_2020','PP_2021']]
+    district_trend_df.columns=[z[-4:] for z in district_trend_df.columns]
+    dt_df=district_trend_df.T
+    dt_df['District Average']=[district_trend_df['2017'].mean(),district_trend_df['2018'].mean(),\
+                               district_trend_df['2019'].mean(),district_trend_df['2020'].mean(),\
+                                   district_trend_df['2021'].mean()]
+    line_ch_sch=px.line(dt_df,markers=True,title="Trend of Pass Percentage in the District")
+    st.plotly_chart(line_ch_sch,use_container_width=True)       
 
 
 
