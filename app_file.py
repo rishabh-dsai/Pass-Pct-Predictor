@@ -97,7 +97,10 @@ with tab_block:
     block_trend_df=block_trend_df[['PP_2017','PP_2018','PP_2019','PP_2020','PP_2021']]
     block_trend_df.columns=[z[-4:] for z in block_trend_df.columns]
     chk=block_trend_df.T
-    line_ch_sch=px.line(chk,markers=True,)
+    chk['Block Average']=[block_trend_df['2017'].mean(),block_trend_df['2018'].mean(),\
+                          block_trend_df['2019'].mean(),block_trend_df['2020'].mean(),\
+                          block_trend_df['2021'].mean()]
+    line_ch_sch=px.line(chk,markers=True,title="Trend of Pass Percentage in Block")
     st.plotly_chart(line_ch_sch,use_container_width=True)   
 
 
