@@ -48,7 +48,7 @@ with st.expander("Correlation Heatmap"):
     base_df=pd.DataFrame([heatmap_data.iloc[5,:]],columns=heatmap_data.columns)
     base_df.drop(columns='Pass_Perce',inplace=True)
     st.write(base_df)
-    feature=st.select_box("Select a Feature to visualize its impact.",('Gen_Studen', 'x_girls', 'Boundary_w',\
+    feature=st.selectbox("Select a Feature to visualize its impact.",('Gen_Studen', 'x_girls', 'Boundary_w',\
                   'Per_m_Lit', 'PTR', 'x_boys','Tot_Teachers', 'OBC_Studen', 'Qualified_T', \
                   'ST_Student'))
     new_val=st.number_input("Enter the value to change to")
