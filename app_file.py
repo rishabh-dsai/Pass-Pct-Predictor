@@ -38,15 +38,17 @@ with st.expander("Feature Importance",expanded=True):
     st.bar_chart(feature_imp,use_container_width=True)
 
 
-with st.expander("Correlation Heatmap"):
+with st.expander("Correlation Heatmap & Feature Impact Analysis"):
     st.write("A correlation heatmap to show the relationship between features. \
                  More importantly between the Pass Percentage & other features.")
     fig=px.imshow(heatmap_data.corr(),color_continuous_scale="viridis")
     st.plotly_chart(fig, use_container_width=True)
     
+    st.write(" ")
     st.write("Impact of features on Pass Percentage:")
     base_df=pd.DataFrame([heatmap_data.iloc[5,:]],columns=heatmap_data.columns)
     base_df.drop(columns='Pass_Perce',inplace=True)
+    st.write("Lets take a sample school with the following metrics:")
     st.write(base_df)
     feature=st.selectbox("Select a Feature to visualize its impact.",('Gen_Studen', 'x_girls', 'Boundary_w',\
                   'Per_m_Lit', 'PTR', 'x_boys','Tot_Teachers', 'OBC_Studen', 'Qualified_T', \
@@ -62,7 +64,11 @@ with st.expander("Correlation Heatmap"):
     new_df['Predicted Pass Percentage']=new_pred
     show_df=pd.concat([base_df,new_df])
     show_df.index=['Old','New']
-    line_ch_sch=px.line(x=show_df.index,y=show_df['Predicted Pass Percentage'],color=show_df.index\
+    st.write("The Old & New feature values:")
+    st.write(show_df)
+    st.write("")
+    st.write("Visualizing it in graph")
+    line_ch_sch=px.bae(x=show_df.index,y=show_df['Predicted Pass Percentage'],color=show_df.index\
                         ,markers=True,title="Impact of Features")
     st.plotly_chart(line_ch_sch,use_container_width=True)
     
