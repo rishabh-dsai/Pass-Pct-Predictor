@@ -68,7 +68,8 @@ with st.expander("Correlation Heatmap & Feature Impact Analysis"):
     st.write(show_df)
     st.write("")
     st.write("Visualizing it in graph")
-    line_ch_sch=px.bar(x=show_df.index,y=show_df['Predicted Pass Percentage'],markers=True,\
+    chart_df=show_df[['Predicted Pass Percentage']]
+    line_ch_sch=px.bar(chart_df,markers=True,\
                        title="Impact of Features")
     st.plotly_chart(line_ch_sch,use_container_width=True)
     
