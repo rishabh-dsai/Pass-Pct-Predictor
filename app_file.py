@@ -164,6 +164,9 @@ with tab_district:
 
 # Displaying Disclaimer & Header
 
+st.write("Please Note: For demo purposes we have considered a subset of features only.\
+         The accuracy of prediction completely relies on the quality and ccompleteness of the dataset.\
+        All datasets used are for showcase purpose only.")
 st.header(" ")
 from PIL import Image
 image = Image.open('deepspatial.jpg')
